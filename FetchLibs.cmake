@@ -60,5 +60,5 @@ function(fetch_fmt)
 endfunction()
 
 function(fetch_spdlog)
-    fetch_lib(spdlog git@github.com:gabime/spdlog.git master)
+    fetch_lib(spdlog https://github.com/gabime/spdlog.git master)
 endfunction()
