@@ -14,12 +14,23 @@ message(STATUS "${Yellow}C++ Version: ${CMAKE_CXX_STANDARD}${ColorReset}")
 
 # Configure ccache (if found)
 find_program(CCACHE_PROGRAM ccache)
-if(CCACHE_PROGRAM)
+if (CCACHE_PROGRAM)
     message(STATUS "${Green}Found ccache: ${CCACHE_PROGRAM}${ColorReset}")
     set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
-else()
+else ()
     message(STATUS "${Red}ccache not found; not using a compiler launcher. Consider configuring CCache${ColorReset}")
-endif()
+endif ()
+
+# Check if mold linker is available
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    find_program(MOLD_PATH mold)
+    if (MOLD_PATH)
+        message(STATUS "${Green}Found mold linker: ${MOLD_PATH}${ColorReset}")
+        add_link_options("-fuse-ld=mold")
+    else()
+        message(STATUS "${Red}mold linker not found, falling back to default system linker. Consider installing mold${ColorReset}")
+    endif()
+endif ()
 
 # check build type
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -28,3 +39,10 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 else()
     message(STATUS "Building in ${CMAKE_BUILD_TYPE} Mode")
 endif()
+
+if (BUILD_TESTING)
+    message(STATUS "Building tests")
+    enable_testing()
+    add_compile_definitions(VL_TESTING)
+
+endif ()
