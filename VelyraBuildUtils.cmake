@@ -1,3 +1,3 @@
-include(Configuration.cmake)
-include(PrettyColors.cmake)
-include(CompilerFlags.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/Configuration.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/CompilerFlags.cmake)

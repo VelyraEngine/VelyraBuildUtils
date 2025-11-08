@@ -1,4 +1,4 @@
-include(PrettyColors.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
 
 # Toolchain Information
 message(STATUS "${Yellow}C Compiler: ${CMAKE_C_COMPILER}${ColorReset}")

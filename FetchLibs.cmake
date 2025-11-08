@@ -1,6 +1,5 @@
 include(FetchContent)
-include(PrettyColors.cmake)
-
+include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
 
 function(include_or_fetch lib_name output_lib_root)
     if (NOT TARGET ${lib_name})
