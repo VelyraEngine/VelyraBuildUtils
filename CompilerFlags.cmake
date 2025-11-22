@@ -1,10 +1,10 @@
 option(NO_SANITIZER "Disable all sanitizers" OFF)
 option(VELYRA_COMPILE_RELAXED "Disables all compiler checks (like conversions, unused parameters, no return values, etc" OFF)
-option(VELYRA_COMPILE_STRICT "Enable strict warnings" ON)
+option(VELYRA_COMPILE_STRICT "Enable strict warnings" OFF)
 
 if (VELYRA_COMPILE_RELAXED)
     message(STATUS "${Red}Enabling RELAXED ompilation${ColorReset}")
-elseif (VELYRA_COMPILE_STRICT AND NOT VELYRA_COMPILE_RELAXED)
+elseif (VELYRA_COMPILE_STRICT)
     message(STATUS "${Green}Enabling STRICT compilation${ColorReset}")
 else ()
     message(STATUS "${Yellow}Enabling NORMAL compilation${ColorReset}")
