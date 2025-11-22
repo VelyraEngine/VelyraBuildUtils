@@ -22,6 +22,10 @@ else ()
 endif ()
 
 function(velyra_target_set_compile_flags TARGET_NAME)
+    if (VELYRA_STRICT)
+        message(STATUS "${Green}Enabling Sanitizers${ColorReset}")
+    endif ()
+
     if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         target_compile_options(${TARGET_NAME} PRIVATE
             /W4
