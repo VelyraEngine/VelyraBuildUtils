@@ -1,6 +1,10 @@
 option(NO_SANITIZER "Disable all sanitizers" OFF)
 option(VELYRA_STRICT "Enable strict warnings" ON)
 
+if (VELYRA_STRICT)
+    message(STATUS "${Green}Enabling STRICT compilation${ColorReset}")
+endif ()
+
 # Compiler specific flags
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     # Flag for recursive macro expansion
@@ -22,9 +26,7 @@ else ()
 endif ()
 
 function(velyra_target_set_compile_flags TARGET_NAME)
-    if (VELYRA_STRICT)
-        message(STATUS "${Green}Enabling Sanitizers${ColorReset}")
-    endif ()
+    message(STATUS "${Green}Setting Compiler flags for target ${TARGET_NAME}${ColorReset}")
 
     if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         target_compile_options(${TARGET_NAME} PRIVATE
