@@ -33,28 +33,30 @@ endif ()
 function(velyra_target_set_compile_flags TARGET_NAME)
     message(STATUS "${Green}Setting Compiler flags for target ${TARGET_NAME}${ColorReset}")
 
-    if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        target_compile_options(${TARGET_NAME} PRIVATE
-            /W4
-            /permissive-
-        )
+    if (NOT VELYRA_COMPILE_RELAXED)
+        if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+            target_compile_options(${TARGET_NAME} PRIVATE
+                /W4
+                /permissive-
+            )
 
-        if (VELYRA_COMPILE_STRICT)
-            target_compile_options(${TARGET_NAME} PRIVATE /WX)
+            if (VELYRA_COMPILE_STRICT)
+                target_compile_options(${TARGET_NAME} PRIVATE /WX)
+            endif()
+
+        elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+            target_compile_options(${TARGET_NAME} PRIVATE
+                -Wall
+                -Wextra
+                -Wpedantic
+                -Wshadow
+                -Wconversion
+                -Wsign-conversion
+            )
+
+            if (VELYRA_COMPILE_STRICT)
+                target_compile_options(${TARGET_NAME} PRIVATE -Werror)
+            endif()
         endif()
-
-    elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-        target_compile_options(${TARGET_NAME} PRIVATE
-            -Wall
-            -Wextra
-            -Wpedantic
-            -Wshadow
-            -Wconversion
-            -Wsign-conversion
-        )
-
-        if (VELYRA_COMPILE_STRICT)
-            target_compile_options(${TARGET_NAME} PRIVATE -Werror)
-        endif()
-    endif()
+    endif ()
 endfunction()
