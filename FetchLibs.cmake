@@ -16,7 +16,7 @@ function(include_or_fetch lib_name output_lib_root)
             message(STATUS "Cloning ${lib_name} from git (main branch)")
             FetchContent_Declare(
                 ${lib_name}
-                GIT_REPOSITORY https://github.com/SyriusEngine/${lib_name}.git
+                GIT_REPOSITORY https://github.com/VelyraEngine/${lib_name}.git
                 GIT_SHALLOW TRUE
                 GIT_TAG main
                 GIT_PROGRESS TRUE
@@ -24,8 +24,6 @@ function(include_or_fetch lib_name output_lib_root)
             FetchContent_MakeAvailable(${lib_name})
         endif()
         set(${output_lib_root} ${lib_root} PARENT_SCOPE)
-    else()
-        message(WARNING "No target ${lib_name} found!")
     endif()
 endfunction()
 
