@@ -35,7 +35,7 @@ endif ()
 # check build type
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "${Green}Building in Debug Mode${ColorReset}")
-    add_compile_definitions(SR_DEBUG)
+    add_compile_definitions(VL_DEBUG)
 else()
     message(STATUS "Building in ${CMAKE_BUILD_TYPE} Mode")
 endif()
