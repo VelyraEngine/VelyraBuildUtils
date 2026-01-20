@@ -50,7 +50,7 @@ function(fetch_glfw)
 endfunction()
 
 function(fetch_glm)
-    fetch_lib(glm https://github.com/g-truc/glm.git bf71a834948186f4097caa076cd2663c69a10e1e)
+    fetch_lib(glm https://github.com/g-truc/glm.git master)
 endfunction()
 
 function(fetch_fmt)
