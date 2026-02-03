@@ -60,3 +60,7 @@ endfunction()
 function(fetch_spdlog)
     fetch_lib(spdlog https://github.com/gabime/spdlog.git v1.x)
 endfunction()
+
+function(fetch_nlohmann_json)
+    fetch_lib(nlohmann_json https://github.com/nlohmann/json.git develop)
+endfunction()
