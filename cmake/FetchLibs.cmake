@@ -1,5 +1,5 @@
 include(FetchContent)
-include(PrettyColors.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
 
 function(vl_include_or_fetch lib_name output_lib_root)
     if (NOT TARGET ${lib_name})
@@ -89,7 +89,7 @@ function(vl_fetch_spdlog)
     vl_find_or_fetch(
         spdlog
         https://github.com/gabime/spdlog.git
-        v1.x
+        v1.13.0
     )
 endfunction()
 
