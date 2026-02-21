@@ -1,4 +1,4 @@
-include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
+include(PrettyColors.cmake)
 
 # Toolchain Information
 message(STATUS "${Yellow}C Compiler: ${CMAKE_C_COMPILER}${ColorReset}")
@@ -38,6 +38,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_definitions(VL_DEBUG)
 else()
     message(STATUS "Building in ${CMAKE_BUILD_TYPE} Mode")
+    add_compile_definitions(VL_RELEASE)
 endif()
 
 if (BUILD_TESTING)
