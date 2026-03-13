@@ -1,3 +1,9 @@
+# Include guard
+if (DEFINED _FETCH_LIBS_CMAKE_ALREADY_INCLUDED)
+    return()
+endif ()
+set(_FETCH_LIBS_CMAKE_ALREADY_INCLUDED TRUE)
+
 include(FetchContent)
 include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
 

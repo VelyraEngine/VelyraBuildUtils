@@ -1,3 +1,9 @@
+# Include guard
+if (DEFINED _PRETTY_COLORS_CMAKE_ALREADY_INCLUDED)
+    return()
+endif ()
+set(_PRETTY_COLORS_CMAKE_ALREADY_INCLUDED TRUE)
+
 if(NOT WIN32)
     string(ASCII 27 Esc)
     set(ColorReset "${Esc}[m")

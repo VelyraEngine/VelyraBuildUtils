@@ -1,3 +1,9 @@
+# Include guard
+if (DEFINED _COMPILER_FLAGS_CMAKE_ALREADY_INCLUDED)
+    return()
+endif ()
+set(_COMPILER_FLAGS_CMAKE_ALREADY_INCLUDED TRUE)
+
 option(NO_SANITIZER "Disable all sanitizers" OFF)
 option(VL_COMPILE_RELAXED "Disables all compiler checks (like conversions, unused parameters, no return values, etc" OFF)
 option(VL_COMPILE_STRICT "Enable strict warnings" OFF)

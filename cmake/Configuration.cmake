@@ -1,3 +1,9 @@
+# Include guard
+if (DEFINED _CONFIGURATION_CMAKE_ALREADY_INCLUDED)
+    return()
+endif ()
+set(_CONFIGURATION_CMAKE_ALREADY_INCLUDED TRUE)
+
 include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
 
 # Toolchain Information
