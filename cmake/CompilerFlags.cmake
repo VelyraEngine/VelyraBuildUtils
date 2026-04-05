@@ -40,6 +40,11 @@ endif ()
 function(vl_target_set_compile_flags TARGET_NAME)
     message(STATUS "${Green}Setting Compiler flags for target ${TARGET_NAME}${ColorReset}")
 
+    set_target_properties(${TARGET_NAME} PROPERTIES
+        UNITY_BUILD ON
+        UNITY_BUILD_BATCH_SIZE 8
+    )
+
     if (NOT VELYRA_COMPILE_RELAXED)
         if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
             target_compile_options(${TARGET_NAME} PRIVATE
