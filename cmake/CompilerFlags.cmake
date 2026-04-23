@@ -37,12 +37,17 @@ else ()
     message(STATUS "${Red}Sanitizers Disabled${ColorReset}")
 endif ()
 
-function(vl_target_set_compile_flags TARGET_NAME)
-    message(STATUS "${Green}Setting Compiler flags for target ${TARGET_NAME}${ColorReset}")
+function(vl_configure_target TARGET_NAME)
+    if (NOT TARGET ${TARGET_NAME})
+        message(FATAL_ERROR "${BoldRed}Target: ${TARGET_NAME} is not a target!${ColorReset}")
+        return()
+    endif ()
+    message(STATUS "${Green}Configuring target ${TARGET_NAME}${ColorReset}")
 
     set_target_properties(${TARGET_NAME} PROPERTIES
         UNITY_BUILD ON
         UNITY_BUILD_BATCH_SIZE 8
+        FOLDER "Velyra"
     )
 
     if (NOT VELYRA_COMPILE_RELAXED)
@@ -71,4 +76,44 @@ function(vl_target_set_compile_flags TARGET_NAME)
             endif()
         endif()
     endif ()
+endfunction()
+
+function(vl_configure_test_target TARGET_NAME)
+    if (NOT TARGET ${TARGET_NAME})
+        message(FATAL_ERROR "${BoldRed}Target: ${TARGET_NAME} is not a target!${ColorReset}")
+        return()
+    endif ()
+    message(STATUS "${BoldGreen}Configuring test target ${TARGET_NAME}${ColorReset}")
+
+    set_target_properties(${TARGET_NAME} PROPERTIES
+        UNITY_BUILD ON
+        UNITY_BUILD_BATCH_SIZE 8
+        FOLDER "VelyraTest"
+    )
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        target_compile_options(${TARGET_NAME} PRIVATE
+            /W4
+            /permissive-
+        )
+    elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        target_compile_options(${TARGET_NAME} PRIVATE
+            -Wall
+            -Wextra
+            -Wpedantic
+            -Wshadow
+            -Wconversion
+            -Wsign-conversion
+        )
+    endif()
+
+    # Also configure CTest in this case
+    set(CTEST_NAME "C${TARGET_NAME}")
+    add_test(
+        NAME ${CTEST_NAME}
+        COMMAND ${PROOT} $<TARGET_FILE:${TARGET_NAME}>
+    )
+
+    set_tests_properties(${CTEST_NAME} PROPERTIES
+        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    )
 endfunction()

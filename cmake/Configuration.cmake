@@ -51,5 +51,4 @@ if (BUILD_TESTING)
     message(STATUS "Building tests")
     enable_testing()
     add_compile_definitions(VL_TESTING)
-
 endif ()
