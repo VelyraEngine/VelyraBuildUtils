@@ -11,8 +11,6 @@
 #   - GCC or Clang compiler
 #   - lcov and/or gcovr installed
 
-option(ENABLE_COVERAGE "Enable code coverage instrumentation" OFF)
-
 if(ENABLE_COVERAGE)
     message(STATUS "Code coverage instrumentation enabled")
     

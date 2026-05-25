@@ -6,12 +6,6 @@ set(_CONFIGURATION_CMAKE_ALREADY_INCLUDED TRUE)
 
 include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
 
-# Toolchain Information
-message(STATUS "${Yellow}C Compiler: ${CMAKE_C_COMPILER}${ColorReset}")
-message(STATUS "${Yellow}C++ Compiler: ${CMAKE_CXX_COMPILER}${ColorReset}")
-message(STATUS "${Yellow}Linker: ${CMAKE_LINKER}${ColorReset}")
-message(STATUS "${Yellow}CMake Generator: ${CMAKE_GENERATOR}${ColorReset}")
-
 # C and C++ information
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -40,15 +34,18 @@ endif ()
 
 # check build type
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "${Green}Building in Debug Mode${ColorReset}")
-    add_compile_definitions(VL_DEBUG)
+    message(STATUS "${Red}Building in Debug Mode${ColorReset}")
 else()
-    message(STATUS "Building in ${CMAKE_BUILD_TYPE} Mode")
-    add_compile_definitions(VL_RELEASE)
+    message(STATUS "${GREEN}Building in ${CMAKE_BUILD_TYPE} Mode${ColorReset}")
 endif()
 
 if (BUILD_TESTING)
     message(STATUS "Building tests")
     enable_testing()
-    add_compile_definitions(VL_TESTING)
 endif ()
+
+# Toolchain Information
+message(STATUS "${Yellow}C Compiler: ${CMAKE_C_COMPILER}${ColorReset}")
+message(STATUS "${Yellow}C++ Compiler: ${CMAKE_CXX_COMPILER}${ColorReset}")
+message(STATUS "${Yellow}Linker: ${CMAKE_LINKER}${ColorReset}")
+message(STATUS "${Yellow}CMake Generator: ${CMAKE_GENERATOR}${ColorReset}")
