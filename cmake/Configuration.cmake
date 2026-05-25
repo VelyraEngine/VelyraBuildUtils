@@ -39,7 +39,7 @@ else()
     message(STATUS "${GREEN}Building in ${CMAKE_BUILD_TYPE} Mode${ColorReset}")
 endif()
 
-if (BUILD_TESTING)
+if (VL_BUILD_TESTING)
     message(STATUS "Building tests")
     enable_testing()
 endif ()
