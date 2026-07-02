@@ -95,7 +95,7 @@ function(vl_fetch_spdlog)
     vl_find_or_fetch(
         spdlog
         https://github.com/gabime/spdlog.git
-        v1.13.0
+        v1.17.0
     )
 endfunction()
 
