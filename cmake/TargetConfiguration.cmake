@@ -18,7 +18,7 @@ function(vl_target_add_compile_definitions TARGET_NAME)
     )
 
     # Testing specific macros
-    if (VL_BUILD_TESTING)
+    if (BUILD_TESTING)
         target_compile_definitions(${TARGET_NAME} PUBLIC VL_TESTING)
     endif ()
 endfunction()
