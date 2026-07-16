@@ -22,7 +22,7 @@ else ()
 endif ()
 
 # Check if mold linker is available
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND VL_ENABLE_MOLD_WHEN_PRESENT)
     find_program(MOLD_PATH mold)
     if (MOLD_PATH)
         message(STATUS "${Green}Found mold linker: ${MOLD_PATH}${ColorReset}")

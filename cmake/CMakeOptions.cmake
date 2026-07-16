@@ -8,6 +8,7 @@ set(_CMAKE_OPTIONS_CMAKE_ALREADY_INCLUDED TRUE)
 option(VL_ENABLE_COVERAGE "Enable code coverage instrumentation" OFF)
 option(VL_ENABLE_SANITIZERS "Enables sanitizers such as address sanitizer and undefined behaviour sanitizer" OFF)
 option(VL_ENABLE_UNITY_BUILD "Enables unity builds" ON)
+option(VL_ENABLE_MOLD_WHEN_PRESENT "If the Mold linker is present, try and use it" ON)
 
 # ===================== Compiler level =====================
 set(VL_COMPILER_LEVEL "NORMAL" CACHE STRING "Compiler warning level")
@@ -43,3 +44,4 @@ message(STATUS "${BoldBlue}Unity Builds = ${VL_ENABLE_UNITY_BUILD}${ColorReset}"
 message(STATUS "${BoldBlue}Create Test Targets = ${BUILD_TESTING}${ColorReset}")
 message(STATUS "${BoldBlue}Compiler Level = ${VL_COMPILER_LEVEL}${ColorReset}")
 message(STATUS "${BoldBlue}Unity Batch Size = ${VL_UNITY_BUILD_BATCH_SIZE}${ColorReset}")
+message(STATUS "${BoldBlue}Use Mold When Present = ${VL_ENABLE_MOLD_WHEN_PRESENT}${ColorReset}")
