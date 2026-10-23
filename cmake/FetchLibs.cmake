@@ -7,7 +7,14 @@ set(_FETCH_LIBS_CMAKE_ALREADY_INCLUDED TRUE)
 include(FetchContent)
 include(${CMAKE_CURRENT_LIST_DIR}/PrettyColors.cmake)
 
+# Optional third argument: git tag/branch to fetch when no local version exists (defaults to main)
 function(vl_include_or_fetch lib_name output_lib_root)
+    if (ARGC GREATER 2)
+        set(git_tag ${ARGV2})
+    else()
+        set(git_tag main)
+    endif()
+
     if (NOT TARGET ${lib_name})
         message(STATUS "Including ${lib_name}")
         # Assume the local version is in a child folder and that the name of the library is the same as the folder name
@@ -19,12 +26,12 @@ function(vl_include_or_fetch lib_name output_lib_root)
             add_subdirectory(${lib_root} ${CMAKE_BINARY_DIR}/${lib_name})
 
         else()
-            message(STATUS "Cloning ${lib_name} from git (main branch)")
+            message(STATUS "Cloning ${lib_name} from git (${git_tag})")
             FetchContent_Declare(
                 ${lib_name}
                 GIT_REPOSITORY https://github.com/VelyraEngine/${lib_name}.git
                 GIT_SHALLOW TRUE
-                GIT_TAG main
+                GIT_TAG ${git_tag}
                 GIT_PROGRESS TRUE
             )
             FetchContent_MakeAvailable(${lib_name})

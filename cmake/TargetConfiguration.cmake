@@ -9,6 +9,15 @@ function(vl_check_valid_target TARGET_NAME)
     endif ()
 endfunction()
 
+function(vl_set_target_properties TARGET_NAME)
+    set_target_properties(${TARGET_NAME} PROPERTIES
+        CXX_STANDARD 23
+        CXX_STANDARD_REQUIRED ON
+        CXX_EXTENSIONS OFF
+    )
+endfunction()
+
+
 function(vl_target_add_compile_definitions TARGET_NAME)
     # Build type
     target_compile_definitions(${TARGET_NAME}
@@ -99,6 +108,7 @@ function(vl_configure_test_target TARGET_NAME)
     message(STATUS "${BoldGreen}Configuring test target ${TARGET_NAME}${ColorReset}")
 
     vl_check_valid_target(${TARGET_NAME})
+    vl_set_target_properties(${TARGET_NAME})
     vl_target_add_compile_definitions(${TARGET_NAME})
     vl_target_configure_sanitizer(${TARGET_NAME})
     vl_target_configure_compiler_level(${TARGET_NAME})
