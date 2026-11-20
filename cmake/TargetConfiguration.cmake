@@ -121,14 +121,19 @@ function(vl_configure_test_target TARGET_NAME)
 
     vl_fetch_gtest() # Fetch GTest
     target_link_libraries(${TARGET_NAME} PUBLIC GTest::gtest GTest::gtest_main)
-    # Also configure CTest in this case
+    # Also configure CTest, but only for the project that is being built. A project that is fetched as a dependency is
+    # tested in its own repo, its tests would otherwise run again in every project that uses it.
+    if (NOT PROJECT_IS_TOP_LEVEL)
+        return()
+    endif ()
     set(CTEST_NAME "C${TARGET_NAME}")
     add_test(
         NAME ${CTEST_NAME}
         COMMAND ${PROOT} $<TARGET_FILE:${TARGET_NAME}>
     )
 
+    # Tests load their resources relative to the root of their own project
     set_tests_properties(${CTEST_NAME} PROPERTIES
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+        WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
     )
 endfunction()
