@@ -32,13 +32,19 @@ The `ci` folder holds the CI of every Velyra repo. CI changes reach a repo when 
 updated, just like the CMake modules.
 
 - `ci/install-deps-linux.sh`: installs the compilers and the system libraries GLFW, OpenGL and the native file dialog
-  need on Ubuntu 24.04. Each package is commented with the reason it is needed.
+  need on Ubuntu (the `ubuntu-latest` runner). Each package is commented with the reason it is needed.
 - `ci/configure.sh`, `ci/build.sh` and `ci/test.sh`: configure with the tests enabled (Ninja on Linux, MSVC on
   Windows), build, and run the tests. Without a display, tests run on a virtual X display (xvfb). Run them from the root of a repo. They build in
   `build-ci` as `Debug` by default; set `VL_BUILD_DIR` and `VL_BUILD_TYPE` to change that (`ci/settings.sh`).
 - `ci/build-and-test.sh [build dir] [build type] [cmake args...]`: runs the three scripts above in one go, for local use.
-- `ci/workflow-template.yml`: the GitHub workflow every repo uses as `.github/workflows/main.yml`. It only calls the
-  scripts above.
+- `ci/workflow-ubuntu.yml` and `ci/workflow-windows.yml`: the GitHub workflows every repo uses as
+  `.github/workflows/ubuntu.yml` and `.github/workflows/windows.yml`. They only call the scripts above. There is one
+  workflow per platform because a GitHub status badge shows the status of a whole workflow, not of a single job:
+
+  ```markdown
+  ![Ubuntu Build](https://github.com/VelyraEngine/<Repo>/actions/workflows/ubuntu.yml/badge.svg?branch=main)
+  ![Windows Build](https://github.com/VelyraEngine/<Repo>/actions/workflows/windows.yml/badge.svg?branch=main)
+  ```
 
 ## Usage
 

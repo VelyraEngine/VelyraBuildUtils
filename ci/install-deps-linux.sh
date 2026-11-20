@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs everything needed to build and test a Velyra project on Ubuntu 24.04, the image of the GitHub runners.
+# Installs everything needed to build and test a Velyra project on Ubuntu, the image of the GitHub runners (ubuntu-latest).
 # Also works on a fresh machine or in a container: sudo is only used when not running as root.
 set -euo pipefail
 
