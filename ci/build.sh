@@ -4,4 +4,5 @@
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/settings.sh"
 
-cmake --build "$build_dir" --parallel "$@"
+# --config picks the configuration for multi-config generators (Visual Studio) and is ignored by Ninja
+cmake --build "$build_dir" --config "$build_type" --parallel "$@"
