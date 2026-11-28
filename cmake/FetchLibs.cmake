@@ -52,12 +52,16 @@ function(vl_find_or_fetch package_name url git_tag)
 
     message(STATUS "${Yellow}Fetching ${package_name} from ${url}, consider installing it for faster CMake configuration${ColorReset}")
 
+    # SYSTEM (CMake 3.25+): the include directories of fetched third-party libraries are passed as system includes
+    # (-isystem, /external:I), so the strict warnings of Velyra targets are not reported for their headers. A
+    # system-installed package found above is an imported target, which CMake already treats as SYSTEM.
     FetchContent_Declare(
         ${package_name}
         GIT_REPOSITORY ${url}
         GIT_TAG        ${git_tag}
         GIT_SHALLOW    TRUE
         GIT_PROGRESS   TRUE
+        SYSTEM
     )
 
     FetchContent_GetProperties(${package_name})

@@ -14,7 +14,7 @@ The `CodeCoverage.cmake` module provides comprehensive code coverage analysis fo
 
 - GCC or Clang compiler
 - lcov and/or gcovr installed
-- CMake 3.22+
+- CMake 3.25+
 
 ```bash
 # Ubuntu/Debian
@@ -28,7 +28,7 @@ sudo apt install lcov gcovr
 The module is automatically included when you include `VelyraBuildUtils.cmake`. No additional include needed.
 
 ```cmake
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.25)
 project(MyProject)
 
 include(VelyraBuildUtils/VelyraBuildUtils.cmake)
@@ -119,7 +119,7 @@ The module automatically excludes:
 ### Example: VelyraImage
 
 ```cmake
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.25)
 project(VelyraImage)
 
 include(VelyraBuildUtils/VelyraBuildUtils.cmake)
